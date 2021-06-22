@@ -6,6 +6,11 @@ Currently supported client languages are Typescript and Javascript.
 
 # Getting started
 
+## Add nuget package
+```
+dotnet add spagme
+```
+
 ## Define the api
 
 ```c#
