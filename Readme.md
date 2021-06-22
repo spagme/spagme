@@ -8,7 +8,7 @@ Currently supported client languages are Typescript and Javascript.
 
 ## Add nuget package
 ```
-dotnet add spagme
+dotnet add package Spagme
 ```
 
 ## Define the api
