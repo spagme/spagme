@@ -4,9 +4,14 @@ Spagme is a framework that creates client code based on an API that is hosted in
 
 Currently supported client languages are Typescript and Javascript.
 
+# Articles
+
+- [Background](https://medium.com/@nilsflemstrom/spagme-a91067c23764)
+
 # Getting started
 
 ## Add nuget package
+
 ```
 dotnet add package Spagme
 ```
@@ -94,7 +99,7 @@ public class ApiController : ControllerBase {
         catch (Exception exc)
         {
             _logger.LogError(exc, $"Error calling method {method}");
-            return StatusCode(StatusCodes.Status500InternalServerError, 
+            return StatusCode(StatusCodes.Status500InternalServerError,
                 $"Error calling method {method}: {exc.Message}");
         }
 
@@ -106,8 +111,8 @@ public class ApiController : ControllerBase {
 ## Call the api
 
 ```ts
-const api = new Api("<host>/api");    
+const api = new Api("<host>/api");
 api.hello("Bob").then((data) => {
-    console.log(data); //Hello, Bob
+  console.log(data); //Hello, Bob
 });
-```        
+```
