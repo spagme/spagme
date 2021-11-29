@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageLicenseFile>Licens.txt</PackageLicenseFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/spagme/spagme</PackageProjectUrl>
     <RepositoryUrl>https://github.com/spagme/spagme</RepositoryUrl>
     <Description>Spagme is a framework that creates client code based on an API that is hosted in a aspnet web application and is defined by a C# class or interface.</Description>
-    <Version>1.0.0-rc1</Version>
+    <Version>6.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
