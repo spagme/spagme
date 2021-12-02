@@ -53,7 +53,7 @@ namespace Spagme
             if (methodInfos.Count > 1) throw new SpagmeException($"Several methods with name {method} found on type {type.FullName}. Method names must be unique and case insensitive.");
             var methodInfo = methodInfos[0];
 
-            //Verify that return type  is Task or Task<>
+            //Verify that return type is Task or Task<>
             if (methodInfo.ReturnType == typeof(Task) && methodInfo.ReturnType.GenericTypeArguments.Length == 0)
             {
                 //do nothing
