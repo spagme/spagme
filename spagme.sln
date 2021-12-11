@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spagme", "Spagme\Spagme.csproj", "{65FDFDF0-6054-4A94-8936-C9585519BD78}"
 EndProject
@@ -10,6 +10,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spagme.Test", "Test\Spagme.Test\Spagme.Test.csproj", "{9B3A3B0F-B722-48F2-BED8-4F26FEC95A24}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Api", "Test\Test.Api\Test.Api.csproj", "{AC57BCCB-B44B-47D6-A00C-F6E471F7DDC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01A97862-DCF2-4641-A0DF-15284CD2A7A4}"
+	ProjectSection(SolutionItems) = preProject
+		Licens.txt = Licens.txt
+		LICENSE = LICENSE
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

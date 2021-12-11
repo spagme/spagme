@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -8,15 +9,25 @@ using Microsoft.Extensions.Logging;
 
 namespace Spagme
 {
-    public static class SpagmeExtension
+    public static class SpagmeExtensions
     {
+
+        public static void UseSpagmeEndpoint<T>(this WebApplication app, string route)
+        {
+            app.UseSpagmeEndpoint(typeof(T), route, new SpagmeEndpointOptions());
+        }
+
+        public static void UseSpagmeEndpoint<T>(this WebApplication app, string route, SpagmeEndpointOptions options)
+        {
+            app.UseSpagmeEndpoint(typeof(T), route, options);
+        }
 
         public static void UseSpagmeEndpoint(this WebApplication app, Type type, string route)
         {
             app.UseSpagmeEndpoint(type, route, new SpagmeEndpointOptions());
         }
 
-        public static void UseSpagmeEndpoint(this WebApplication app, Type type, string route, SpagmeEndpointOptions options) 
+        public static void UseSpagmeEndpoint(this WebApplication app, Type type, string route, SpagmeEndpointOptions options)
         {
             app.UseEndpoints(endpoints =>
             {
@@ -48,19 +59,19 @@ namespace Spagme
                         try
                         {
                             //Execute
-                            await Execute(context, myapi, method);
+                            await Execute(context, type, myapi, method);
                         }
                         catch (Exception exc)
                         {
                             //OnError
-                            if(!await options.OnError.Invoke(context, method, exc)) return;
+                            if (!await options.OnError.Invoke(context, method, exc)) return;
                             throw;
                         }
                     }
                     else
                     {
                         //Execute
-                        await Execute(context, myapi, method);
+                        await Execute(context, type, myapi, method);
                     }
 
                     //OnAfter
@@ -73,17 +84,25 @@ namespace Spagme
             });
         }
 
-        private static async Task Execute(HttpContext context, object myapi, string method)
+        public static async Task<IDictionary<string, object>> SpagmeParseParameters(this HttpContext context)
         {
-            //Parse input parameters
-            var input = context.Request.HasFormContentType
-                ? context.Request.Form.ToDictionary(o => o.Key.ToLower(),
-                    pair => pair.Value.ToString())
-                : context.Request.Query.ToDictionary(o => o.Key.ToLower(),
-                    pair => pair.Value.ToString());
+            if (context == null) return new Dictionary<string, object>();
 
+            if (context.Request.HasFormContentType)
+            {
+                return context.Request.Form.ToDictionary(o => o.Key.ToLower(),
+                    pair => (object)pair.Value.ToString());
+            }
+
+            return context.Request.Query.ToDictionary(o => o.Key.ToLower(),
+                pair => (object)pair.Value.ToString());
+
+        }
+
+        private static async Task Execute(HttpContext context, Type type, object myapi, string method)
+        {
             //Call the api
-            var resp = await SpagmeApi.Call(myapi, method, input);
+            var resp = await SpagmeApi.Call(type, myapi, method, await context.SpagmeParseParameters());
 
             //Create response
             context.Response.StatusCode = StatusCodes.Status200OK;

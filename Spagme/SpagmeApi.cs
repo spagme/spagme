@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Spagme
 {
@@ -15,7 +16,7 @@ namespace Spagme
         /// <param name="method">Method</param>
         /// <param name="input">Dictionary with parameters. Must match with parameters name</param>
         /// <returns></returns>
-        public static async Task<string> Call(object instance, string method, IDictionary<string, string> input)
+        public static async Task<string> Call(object instance, string method, IDictionary<string, object> input)
         {
             if (instance == null) throw new SpagmeException("instance is null");
             var type = instance.GetType();
@@ -31,7 +32,7 @@ namespace Spagme
         /// <param name="method">Method</param>
         /// <param name="input">Dictionary with parameters. Must match with parameters name</param>
         /// <returns></returns>
-        public static async Task<string> Call(Type type, object instance, string method, IDictionary<string, string> input)
+        public static async Task<string> Call(Type type, object instance, string method, IDictionary<string, object> input)
         {
             //Null checks
             if (instance == null) throw new SpagmeException("instance is null");
@@ -79,7 +80,14 @@ namespace Spagme
                     try
                     {
                         var value = input[name];
-                        parameterValues[index] = Deserialize(value, parameter.ParameterType);
+                        if (value is string str)
+                        {
+                            parameterValues[index] = Deserialize(str, parameter.ParameterType);
+                        }
+                        else
+                        {
+                            throw new SpagmeException($"Error when deserializing parameter {parameters[index].Name} for method {method} on type {type.FullName}. Invalid type: {value?.GetType()}");
+                        }
                     }
                     catch (Exception exc)
                     {
@@ -143,5 +151,6 @@ namespace Spagme
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             });
         }
+
     }
 }
