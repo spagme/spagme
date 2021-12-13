@@ -37,15 +37,9 @@ namespace Test.Api.Controllers
 
             try
             {
-                var input = Request.Query.ToDictionary(o => o.Key.ToLower(), pair => pair.Value.ToString());
-                if (!input.Keys.Any())
-                {
-                    input = Request.Form.ToDictionary(o => o.Key.ToLower(), pair => pair.Value.ToString());
-                }
-
                 return new ContentResult()
                 {
-                    Content = await SpagmeApi.Call(Activator.CreateInstance(apiType), method, input),
+                    Content = await SpagmeApi.Call(Activator.CreateInstance(apiType), method, await HttpContext.SpagmeParseParameters()),
                     ContentType = "application/json"
                 };
             }
