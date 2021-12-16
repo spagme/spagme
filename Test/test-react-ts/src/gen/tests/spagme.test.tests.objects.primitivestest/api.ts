@@ -15,20 +15,20 @@ export interface Primitives {
 }
 
 export interface PrimitivesNullable {
-  string?: string | null | undefined;
-  bool?: boolean | null | undefined;
-  sbyte?: number | null | undefined;
-  char?: string | null | undefined;
-  decimal?: number | null | undefined;
-  double?: number | null | undefined;
-  float?: number | null | undefined;
-  int?: number | null | undefined;
-  uint?: number | null | undefined;
-  long?: number | null | undefined;
-  ulong?: number | null | undefined;
-  short?: number | null | undefined;
-  ushort?: number | null | undefined;
-  dateTime?: Date | null | undefined;
+  string: string | null;
+  bool: boolean | null;
+  sbyte: number | null;
+  char: string | null;
+  decimal: number | null;
+  double: number | null;
+  float: number | null;
+  int: number | null;
+  uint: number | null;
+  long: number | null;
+  ulong: number | null;
+  short: number | null;
+  ushort: number | null;
+  dateTime: Date | null;
 }
 
 export interface ApiInterface {

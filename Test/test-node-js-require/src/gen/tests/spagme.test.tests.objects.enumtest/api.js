@@ -65,6 +65,28 @@ class Api {
     });
   };
   /**
+  * @param {Array<number>} input
+  * @param {string} method 'get' or 'post'
+  * @returns {Promise<Array<number>>}
+  */
+  arrayNotNullable = (input, method = 'post') => {
+    const data = {};
+    data.input = JSON.stringify(input);
+    if(method === 'get') return this.get(`${this.url}/arrayNotNullable`, data);
+    return this.post(`${this.url}/arrayNotNullable`, data);
+  }
+  /**
+  * @param {Array<number>} input
+  * @param {string} method 'get' or 'post'
+  * @returns {Promise<Array<number>>}
+  */
+  arrayNullable = (input, method = 'post') => {
+    const data = {};
+    data.input = JSON.stringify(input);
+    if(method === 'get') return this.get(`${this.url}/arrayNullable`, data);
+    return this.post(`${this.url}/arrayNullable`, data);
+  }
+  /**
   * @param {number} input
   * @param {string} method 'get' or 'post'
   * @returns {Promise<number>}

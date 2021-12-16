@@ -5,6 +5,374 @@ import { diff } from 'deep-object-diff';
 
 export const tests: Array<Test> = [];
 
+//arrayNotNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNotNullable/default/post',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color> | null = [api.Color.Black,api.Color.Black,api.Color.Black];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNotNullable(input, 'post');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNotNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNotNullable/default/get',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color> | null = [api.Color.Black,api.Color.Black,api.Color.Black];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNotNullable(input, 'get');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNotNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNotNullable/nullable/post',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color> | null = [api.Color.Black,api.Color.Black,api.Color.Black];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNotNullable(input, 'post');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNotNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNotNullable/nullable/get',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color> | null = [api.Color.Black,api.Color.Black,api.Color.Black];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNotNullable(input, 'get');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNotNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNotNullable/min/post',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color> | null = [api.Color.Black,api.Color.Black,api.Color.Black];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNotNullable(input, 'post');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNotNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNotNullable/min/get',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color> | null = [api.Color.Black,api.Color.Black,api.Color.Black];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNotNullable(input, 'get');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNotNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNotNullable/max/post',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color> | null = [api.Color.Blue,api.Color.Blue,api.Color.Blue];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNotNullable(input, 'post');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNotNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNotNullable/max/get',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color> | null = [api.Color.Blue,api.Color.Blue,api.Color.Blue];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNotNullable(input, 'get');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNullable/default/post',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color | null> | null = [api.Color.Black,api.Color.Black,api.Color.Black];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNullable(input, 'post');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNullable/default/get',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color | null> | null = [api.Color.Black,api.Color.Black,api.Color.Black];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNullable(input, 'get');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNullable/nullable/post',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color | null> | null = [null,null,null];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNullable(input, 'post');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNullable/nullable/get',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color | null> | null = [null,null,null];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNullable(input, 'get');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNullable/min/post',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color | null> | null = [api.Color.Black,api.Color.Black,api.Color.Black];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNullable(input, 'post');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNullable/min/get',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color | null> | null = [api.Color.Black,api.Color.Black,api.Color.Black];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNullable(input, 'get');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNullable/max/post',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color | null> | null = [api.Color.Blue,api.Color.Blue,api.Color.Blue];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNullable(input, 'post');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
+//arrayNullable
+tests.push(
+  {
+    name: 'spagme.test.tests.objects.enumtest/arrayNullable/max/get',
+    status: 'NONE',
+    execute: async (me: Test, url: string): Promise<void> => {
+      try {
+        const input: Array<api.Color | null> | null = [api.Color.Blue,api.Color.Blue,api.Color.Blue];
+        me.input = {...input}; 
+        const output = await new api.Api(url + '/spagme.test.tests.objects.enumtest').arrayNullable(input, 'get');  
+        me.output = {...output};
+        me.status = 'ERROR';
+        if(Object.keys(diff(input, output as object)).length === 0) me.status = 'SUCCESS';
+        return Promise.resolve(undefined);
+      }
+      catch(e) {
+        me.status = 'ERROR';
+        me.error = {...e};
+        return Promise.resolve(undefined);
+      }
+    },
+  }
+)
 //enum
 tests.push(
   {

@@ -306,57 +306,51 @@ namespace Spagme.Js
             ret.AppendLine(Intedent(1) + Intedent("    })"));
             ret.AppendLine(Intedent(1) + Intedent("  })") + Sc);
             ret.AppendLine(Intedent(1) + Intedent("}" + Sc));
-
-            //post and get helper when no return object
-            if (methods.Any(o => ReflectionUtil.GetOutputType(o) == null))
-            {
-                ret.AppendLine(Intedent(1) + Intedent("postEmpty = (url, data) =>  {"));
-                ret.AppendLine(Intedent(1) + Intedent("  return new Promise( (resolve, reject) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("    let formData = new FormData()") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    Object.keys(data).forEach((key) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      formData.append(key, data[key])"));
-                ret.AppendLine(Intedent(1) + Intedent("    })") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    fetch(url, {"));
-                ret.AppendLine(Intedent(1) + Intedent("      ...this.init,"));
-                ret.AppendLine(Intedent(1) + Intedent("      method: 'post',"));
-                ret.AppendLine(Intedent(1) + Intedent("      body: formData,"));
-                ret.AppendLine(Intedent(1) + Intedent("    }).then((resp) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      if(resp.ok) {"));
-                ret.AppendLine(Intedent(1) + Intedent("        if(resp.ok) {"));
-                ret.AppendLine(Intedent(1) + Intedent("          resolve(undefined)") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("        }"));
-                ret.AppendLine(Intedent(1) + Intedent("      }"));
-                ret.AppendLine(Intedent(1) + Intedent("      else {"));
-                ret.AppendLine(Intedent(1) + Intedent("        reject({status: resp.status, statusText: resp.statusText, reason: null})") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("      }"));
-                ret.AppendLine(Intedent(1) + Intedent("    }).catch((e) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      reject({status: null, statusText: null, reason: '' + e})") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    })"));
-                ret.AppendLine(Intedent(1) + Intedent("  })") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("}" + Sc));
-                ret.AppendLine(Intedent(1) + Intedent("getEmpty = (url, data) =>  {"));
-                ret.AppendLine(Intedent(1) + Intedent("  return new Promise( (resolve, reject) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("    let u = new URL(url)") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    Object.keys(data).forEach((key) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      u.searchParams.append(key, data[key])"));
-                ret.AppendLine(Intedent(1) + Intedent("    })") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    fetch(u.toString(), {"));
-                ret.AppendLine(Intedent(1) + Intedent("      ...this.init,"));
-                ret.AppendLine(Intedent(1) + Intedent("      method: 'get'"));
-                ret.AppendLine(Intedent(1) + Intedent("    }).then((resp) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      if(resp.ok) {"));
-                ret.AppendLine(Intedent(1) + Intedent("        resolve(undefined)") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("      }"));
-                ret.AppendLine(Intedent(1) + Intedent("      else {"));
-                ret.AppendLine(Intedent(1) + Intedent("        reject({status: resp.status, statusText: resp.statusText, reason: null})") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("      }"));
-                ret.AppendLine(Intedent(1) + Intedent("    }).catch((e) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      reject({status: null, statusText: null, reason: '' + e})") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    })"));
-                ret.AppendLine(Intedent(1) + Intedent("  })") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("}" + Sc));
-
-            }
+            ret.AppendLine(Intedent(1) + Intedent("postEmpty = (url, data) =>  {"));
+            ret.AppendLine(Intedent(1) + Intedent("  return new Promise( (resolve, reject) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("    let formData = new FormData()") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    Object.keys(data).forEach((key) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      formData.append(key, data[key])"));
+            ret.AppendLine(Intedent(1) + Intedent("    })") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    fetch(url, {"));
+            ret.AppendLine(Intedent(1) + Intedent("      ...this.init,"));
+            ret.AppendLine(Intedent(1) + Intedent("      method: 'post',"));
+            ret.AppendLine(Intedent(1) + Intedent("      body: formData,"));
+            ret.AppendLine(Intedent(1) + Intedent("    }).then((resp) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      if(resp.ok) {"));
+            ret.AppendLine(Intedent(1) + Intedent("        if(resp.ok) {"));
+            ret.AppendLine(Intedent(1) + Intedent("          resolve(undefined)") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("        }"));
+            ret.AppendLine(Intedent(1) + Intedent("      }"));
+            ret.AppendLine(Intedent(1) + Intedent("      else {"));
+            ret.AppendLine(Intedent(1) + Intedent("        reject({status: resp.status, statusText: resp.statusText, reason: null})") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("      }"));
+            ret.AppendLine(Intedent(1) + Intedent("    }).catch((e) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      reject({status: null, statusText: null, reason: '' + e})") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    })"));
+            ret.AppendLine(Intedent(1) + Intedent("  })") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("}" + Sc));
+            ret.AppendLine(Intedent(1) + Intedent("getEmpty = (url, data) =>  {"));
+            ret.AppendLine(Intedent(1) + Intedent("  return new Promise( (resolve, reject) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("    let u = new URL(url)") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    Object.keys(data).forEach((key) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      u.searchParams.append(key, data[key])"));
+            ret.AppendLine(Intedent(1) + Intedent("    })") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    fetch(u.toString(), {"));
+            ret.AppendLine(Intedent(1) + Intedent("      ...this.init,"));
+            ret.AppendLine(Intedent(1) + Intedent("      method: 'get'"));
+            ret.AppendLine(Intedent(1) + Intedent("    }).then((resp) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      if(resp.ok) {"));
+            ret.AppendLine(Intedent(1) + Intedent("        resolve(undefined)") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("      }"));
+            ret.AppendLine(Intedent(1) + Intedent("      else {"));
+            ret.AppendLine(Intedent(1) + Intedent("        reject({status: resp.status, statusText: resp.statusText, reason: null})") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("      }"));
+            ret.AppendLine(Intedent(1) + Intedent("    }).catch((e) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      reject({status: null, statusText: null, reason: '' + e})") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    })"));
+            ret.AppendLine(Intedent(1) + Intedent("  })") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("}" + Sc));
 
             //Generate api methods
             foreach (var m in methods)
@@ -450,7 +444,7 @@ namespace Spagme.Js
                     {
                         ret.AppendLine(Intedent(2) + $"data.{ReflectionUtil.ToCamelCase(name)} = JSON.stringify({ReflectionUtil.ToCamelCase(name)})" + Sc);
                     }
-                    ret.AppendLine(Intedent(2) + $"if(method === 'get') return this.getEmpty(`${{this.url}}/{ReflectionUtil.ToCamelCase(m.Name)}`, formData)" + Sc);
+                    ret.AppendLine(Intedent(2) + $"if(method === 'get') return this.getEmpty(`${{this.url}}/{ReflectionUtil.ToCamelCase(m.Name)}`, data)" + Sc);
                     ret.AppendLine(Intedent(2) + $"return this.postEmpty(`${{this.url}}/{ReflectionUtil.ToCamelCase(m.Name)}`, data)" + Sc);
                     ret.AppendLine(Intedent(1) + $"}}");
                 }

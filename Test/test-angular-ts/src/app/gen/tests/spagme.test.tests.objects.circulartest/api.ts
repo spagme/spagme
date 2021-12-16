@@ -1,6 +1,6 @@
 export interface Circular {
-  name?: string | null | undefined;
-  child?: Circular | null | undefined;
+  name: string | null;
+  child: Circular | null;
 }
 
 export interface ApiInterface {

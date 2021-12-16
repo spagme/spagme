@@ -25,5 +25,15 @@ namespace Spagme.Test.Tests.Objects
         {
             return Task.FromResult(input);
         }
+
+        public Task<Color?[]> ArrayNullable(Color?[] input)
+        {
+            return Task.FromResult(input);
+        }
+
+        public Task<Color[]> ArrayNotNullable(Color[] input)
+        {
+            return Task.FromResult(input);
+        }
     }
 }

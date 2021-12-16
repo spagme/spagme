@@ -7,7 +7,7 @@
     <PackageProjectUrl>https://github.com/spagme/spagme</PackageProjectUrl>
     <RepositoryUrl>https://github.com/spagme/spagme</RepositoryUrl>
     <Description>Spagme is a framework that creates client code based on an API that is hosted in a aspnet web application and is defined by a C# class or interface.</Description>
-    <Version>6.0.1</Version>
+    <Version>6.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

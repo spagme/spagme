@@ -5,17 +5,21 @@ export enum Color {
 }
 
 export interface ApiInterface {
+  arrayNotNullable: (input: Array<Color> | null, method?: string) => Promise<Array<Color> | null>,
+  arrayNullable: (input: Array<Color | null> | null, method?: string) => Promise<Array<Color | null> | null>,
   enum: (input: Color, method?: string) => Promise<Color>,
   enumList: (input: Array<Color> | null, method?: string) => Promise<Array<Color> | null>,
-  enumListNullable: (input: Array<Color | null | null> | null, method?: string) => Promise<Array<Color | null | null> | null>,
-  enumNullable: (input: Color | null | null, method?: string) => Promise<Color | null | null>,
+  enumListNullable: (input: Array<Color | null> | null, method?: string) => Promise<Array<Color | null> | null>,
+  enumNullable: (input: Color | null, method?: string) => Promise<Color | null>,
 }
 
 export abstract class ApiBase implements ApiInterface {
+  abstract arrayNotNullable: (input: Array<Color> | null, method?: string) => Promise<Array<Color> | null>;
+  abstract arrayNullable: (input: Array<Color | null> | null, method?: string) => Promise<Array<Color | null> | null>;
   abstract enum: (input: Color, method?: string) => Promise<Color>;
   abstract enumList: (input: Array<Color> | null, method?: string) => Promise<Array<Color> | null>;
-  abstract enumListNullable: (input: Array<Color | null | null> | null, method?: string) => Promise<Array<Color | null | null> | null>;
-  abstract enumNullable: (input: Color | null | null, method?: string) => Promise<Color | null | null>;
+  abstract enumListNullable: (input: Array<Color | null> | null, method?: string) => Promise<Array<Color | null> | null>;
+  abstract enumNullable: (input: Color | null, method?: string) => Promise<Color | null>;
 }
 
 export class Api implements ApiBase {
@@ -82,6 +86,18 @@ export class Api implements ApiBase {
       })
     });
   }
+  arrayNotNullable: (input: Array<Color> | null, method?: string)  => Promise<Array<Color> | null> = (input: Array<Color> | null, method?: string) : Promise<Array<Color> | null> => {
+    const data: any = {};
+    data.input = JSON.stringify(input);
+    if(method === 'get') return this.get(`${this.url}/arrayNotNullable`, data);
+    return this.post(`${this.url}/arrayNotNullable`, data);
+  }
+  arrayNullable: (input: Array<Color | null> | null, method?: string)  => Promise<Array<Color | null> | null> = (input: Array<Color | null> | null, method?: string) : Promise<Array<Color | null> | null> => {
+    const data: any = {};
+    data.input = JSON.stringify(input);
+    if(method === 'get') return this.get(`${this.url}/arrayNullable`, data);
+    return this.post(`${this.url}/arrayNullable`, data);
+  }
   enum: (input: Color, method?: string)  => Promise<Color> = (input: Color, method?: string) : Promise<Color> => {
     const data: any = {};
     data.input = JSON.stringify(input);
@@ -94,13 +110,13 @@ export class Api implements ApiBase {
     if(method === 'get') return this.get(`${this.url}/enumList`, data);
     return this.post(`${this.url}/enumList`, data);
   }
-  enumListNullable: (input: Array<Color | null | null> | null, method?: string)  => Promise<Array<Color | null | null> | null> = (input: Array<Color | null | null> | null, method?: string) : Promise<Array<Color | null | null> | null> => {
+  enumListNullable: (input: Array<Color | null> | null, method?: string)  => Promise<Array<Color | null> | null> = (input: Array<Color | null> | null, method?: string) : Promise<Array<Color | null> | null> => {
     const data: any = {};
     data.input = JSON.stringify(input);
     if(method === 'get') return this.get(`${this.url}/enumListNullable`, data);
     return this.post(`${this.url}/enumListNullable`, data);
   }
-  enumNullable: (input: Color | null | null, method?: string)  => Promise<Color | null | null> = (input: Color | null | null, method?: string) : Promise<Color | null | null> => {
+  enumNullable: (input: Color | null, method?: string)  => Promise<Color | null> = (input: Color | null, method?: string) : Promise<Color | null> => {
     const data: any = {};
     data.input = JSON.stringify(input);
     if(method === 'get') return this.get(`${this.url}/enumNullable`, data);

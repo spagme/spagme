@@ -126,9 +126,9 @@ namespace Spagme.Ts
             //Generate properties
             foreach (var prop in t.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
             {
-                if (ReflectionUtil.IsNullable(prop.PropertyType))
+                if (ReflectionUtil.IsNullable(prop.PropertyType) && !prop.PropertyType.IsEnum)
                 {
-                    ret.AppendLine(Intedent(1) + $"{ReflectionUtil.ToCamelCase(prop.Name)}?: {GetTypeName(prop.PropertyType)} | null | undefined" + Sc);
+                    ret.AppendLine(Intedent(1) + $"{ReflectionUtil.ToCamelCase(prop.Name)}: {GetTypeName(prop.PropertyType)} | null" + Sc);
                 }
                 else
                 {
@@ -341,57 +341,51 @@ namespace Spagme.Ts
             ret.AppendLine(Intedent(1) + Intedent("    })"));
             ret.AppendLine(Intedent(1) + Intedent("  })") + Sc);
             ret.AppendLine(Intedent(1) + Intedent("}"));
-
-            //post and get helpers when no object is returned
-            if (methods.Any(o => ReflectionUtil.GetOutputType(o) == null))
-            {
-                ret.AppendLine(Intedent(1) + Intedent("private postEmpty(url: string, data: any) : Promise<void> {"));
-                ret.AppendLine(Intedent(1) + Intedent("  return new Promise<any>( (resolve, reject) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("    let formData = new FormData()") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    Object.keys(data).forEach((key) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      formData.append(key, data[key] as string)"));
-                ret.AppendLine(Intedent(1) + Intedent("    })") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    fetch(url, {"));
-                ret.AppendLine(Intedent(1) + Intedent("      ...this.init,"));
-                ret.AppendLine(Intedent(1) + Intedent("      method: 'post',"));
-                ret.AppendLine(Intedent(1) + Intedent("      body: formData,"));
-                ret.AppendLine(Intedent(1) + Intedent("    }).then((resp) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      if(resp.ok) {"));
-                ret.AppendLine(Intedent(1) + Intedent("        if(resp.ok) {"));
-                ret.AppendLine(Intedent(1) + Intedent("          resolve(undefined)") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("        }"));
-                ret.AppendLine(Intedent(1) + Intedent("      }"));
-                ret.AppendLine(Intedent(1) + Intedent("      else {"));
-                ret.AppendLine(Intedent(1) + Intedent("        reject({status: resp.status, statusText: resp.statusText, reason: null})") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("      }"));
-                ret.AppendLine(Intedent(1) + Intedent("    }).catch((e) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      reject({status: null, statusText: null, reason: '' + e})") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    })"));
-                ret.AppendLine(Intedent(1) + Intedent("  })") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("}"));
-                ret.AppendLine(Intedent(1) + Intedent("private getEmpty(url: string, data: any) : Promise<void> {"));
-                ret.AppendLine(Intedent(1) + Intedent("  return new Promise<any>( (resolve, reject) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("    let u = new URL(url)") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    Object.keys(data).forEach((key) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      u.searchParams.append(key, data[key] as string)"));
-                ret.AppendLine(Intedent(1) + Intedent("    })") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    fetch(u.toString(), {"));
-                ret.AppendLine(Intedent(1) + Intedent("      ...this.init,"));
-                ret.AppendLine(Intedent(1) + Intedent("      method: 'get'"));
-                ret.AppendLine(Intedent(1) + Intedent("    }).then((resp) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      if(resp.ok) {"));
-                ret.AppendLine(Intedent(1) + Intedent("        resolve(undefined)") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("      }"));
-                ret.AppendLine(Intedent(1) + Intedent("      else {"));
-                ret.AppendLine(Intedent(1) + Intedent("        reject({status: resp.status, statusText: resp.statusText, reason: null})") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("      }"));
-                ret.AppendLine(Intedent(1) + Intedent("    }).catch((e) => {"));
-                ret.AppendLine(Intedent(1) + Intedent("      reject({status: null, statusText: null, reason: '' + e})") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("    })"));
-                ret.AppendLine(Intedent(1) + Intedent("  })") + Sc);
-                ret.AppendLine(Intedent(1) + Intedent("}"));
-
-            }
+            ret.AppendLine(Intedent(1) + Intedent("private postEmpty(url: string, data: any) : Promise<void> {"));
+            ret.AppendLine(Intedent(1) + Intedent("  return new Promise<any>( (resolve, reject) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("    let formData = new FormData()") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    Object.keys(data).forEach((key) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      formData.append(key, data[key] as string)"));
+            ret.AppendLine(Intedent(1) + Intedent("    })") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    fetch(url, {"));
+            ret.AppendLine(Intedent(1) + Intedent("      ...this.init,"));
+            ret.AppendLine(Intedent(1) + Intedent("      method: 'post',"));
+            ret.AppendLine(Intedent(1) + Intedent("      body: formData,"));
+            ret.AppendLine(Intedent(1) + Intedent("    }).then((resp) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      if(resp.ok) {"));
+            ret.AppendLine(Intedent(1) + Intedent("        if(resp.ok) {"));
+            ret.AppendLine(Intedent(1) + Intedent("          resolve(undefined)") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("        }"));
+            ret.AppendLine(Intedent(1) + Intedent("      }"));
+            ret.AppendLine(Intedent(1) + Intedent("      else {"));
+            ret.AppendLine(Intedent(1) + Intedent("        reject({status: resp.status, statusText: resp.statusText, reason: null})") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("      }"));
+            ret.AppendLine(Intedent(1) + Intedent("    }).catch((e) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      reject({status: null, statusText: null, reason: '' + e})") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    })"));
+            ret.AppendLine(Intedent(1) + Intedent("  })") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("}"));
+            ret.AppendLine(Intedent(1) + Intedent("private getEmpty(url: string, data: any) : Promise<void> {"));
+            ret.AppendLine(Intedent(1) + Intedent("  return new Promise<any>( (resolve, reject) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("    let u = new URL(url)") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    Object.keys(data).forEach((key) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      u.searchParams.append(key, data[key] as string)"));
+            ret.AppendLine(Intedent(1) + Intedent("    })") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    fetch(u.toString(), {"));
+            ret.AppendLine(Intedent(1) + Intedent("      ...this.init,"));
+            ret.AppendLine(Intedent(1) + Intedent("      method: 'get'"));
+            ret.AppendLine(Intedent(1) + Intedent("    }).then((resp) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      if(resp.ok) {"));
+            ret.AppendLine(Intedent(1) + Intedent("        resolve(undefined)") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("      }"));
+            ret.AppendLine(Intedent(1) + Intedent("      else {"));
+            ret.AppendLine(Intedent(1) + Intedent("        reject({status: resp.status, statusText: resp.statusText, reason: null})") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("      }"));
+            ret.AppendLine(Intedent(1) + Intedent("    }).catch((e) => {"));
+            ret.AppendLine(Intedent(1) + Intedent("      reject({status: null, statusText: null, reason: '' + e})") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("    })"));
+            ret.AppendLine(Intedent(1) + Intedent("  })") + Sc);
+            ret.AppendLine(Intedent(1) + Intedent("}"));
 
             //Generate code for each api method
             foreach (var m in methods)
@@ -491,7 +485,7 @@ namespace Spagme.Ts
                     {
                         ret.AppendLine(Intedent(2) + $"data.{ReflectionUtil.ToCamelCase(name)} = JSON.stringify({ReflectionUtil.ToCamelCase(name)})" + Sc);
                     }
-                    ret.AppendLine(Intedent(2) + $"if(method === 'get') return this.getEmpty(`${{this.url}}/{ReflectionUtil.ToCamelCase(m.Name)}`, formData)" + Sc);
+                    ret.AppendLine(Intedent(2) + $"if(method === 'get') return this.getEmpty(`${{this.url}}/{ReflectionUtil.ToCamelCase(m.Name)}`, data)" + Sc);
                     ret.AppendLine(Intedent(2) + $"return this.postEmpty(`${{this.url}}/{ReflectionUtil.ToCamelCase(m.Name)}`, data)" + Sc);
                     ret.AppendLine(Intedent(1) + $"}}");
                 }
@@ -516,10 +510,6 @@ namespace Spagme.Ts
             {
                 return t.Name;
             }
-            if (Nullable.GetUnderlyingType(t) != null && Nullable.GetUnderlyingType(t).IsEnum)
-            {
-                return Nullable.GetUnderlyingType(t).Name + " | null";
-            }
 
             //Nullable?
             if (Nullable.GetUnderlyingType(t) != null)
@@ -535,7 +525,7 @@ namespace Spagme.Ts
                 {
                     if (elementType.IsEnum)
                     {
-                        return "Array<" + t.Name + ">";
+                        return "Array<" + elementType.Name + ">";
                     }
                     if (Nullable.GetUnderlyingType(elementType) != null && Nullable.GetUnderlyingType(elementType).IsEnum)
                     {
@@ -591,11 +581,11 @@ namespace Spagme.Ts
                 var baseType = t.GetGenericArguments()[0];
                 if (ReflectionUtil.IsNullable(baseType))
                 {
-                    return "Array<" + GetTypeName(t.GenericTypeArguments[0]) + " | null>";
+                    return "Array<" + GetTypeName(baseType) + " | null>";
                 }
                 else
                 {
-                    return "Array<" + GetTypeName(t.GenericTypeArguments[0]) + ">";
+                    return "Array<" + GetTypeName(baseType) + ">";
                 }
             }
 

@@ -1,9 +1,9 @@
 export interface Car {
-  brand?: string | null | undefined;
+  brand: string | null;
   color: Color;
-  roofColor?: Color | null | null | undefined;
-  options1?: Array<Color | null | null> | null | undefined;
-  options2?: Array<Color> | null | undefined;
+  roofColor: Color | null;
+  options1: Array<Color | null> | null;
+  options2: Array<Color> | null;
 }
 
 export interface VolvoCar extends Car {
@@ -11,7 +11,7 @@ export interface VolvoCar extends Car {
 }
 
 export interface FordCar extends Car {
-  fordRoof?: string | null | undefined;
+  fordRoof: string | null;
 }
 
 export enum Color {

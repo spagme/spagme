@@ -1,6 +1,6 @@
 # Spagme
 
-Spagme is a lightweight framework that creates client code based on an API that is hosted in a aspnet web application and is defined by a C# class or interface.
+Spagme is a lightweight RPC framework that creates client code based on an API that is hosted in a aspnet web application and is defined by a C# class or interface.
 
 Currently supported client languages are typescript and javascript.
 
